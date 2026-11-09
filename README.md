@@ -19,7 +19,7 @@ draws it as one visual page you can click around in.
 
 ```
 /plugin marketplace add tunmin11/claude-plugin-napkin
-/plugin install napkin
+/plugin install napkin@napkin
 ```
 
 **claude.ai**: download this repo, zip the `skills/napkin` folder, and upload it under
