@@ -35,7 +35,8 @@ Work out what they brought:
 - **Coming back to a topic** ("more on mortgages", "go deeper", "redo the picture"). Find the
   existing napkin and read its `notes.md` **first** (`references/page-shell.md` → Publishing →
   *Coming back*). Don't re-ask questions it already answers. Re-read only files that changed or
-  that the new angle needs. Add a page; don't start a new artifact.
+  that the new angle needs. Don't open old page files (only the one being fixed). Add a page;
+  don't start a new artifact.
 
 ## 2. Quick questions: at most 3, in one message
 
@@ -74,11 +75,11 @@ Write 5–15 facts the page will rest on. Each one: the claim in plain words, a 
 2. Pick a shape from `references/shapes.md` that fits this topic **for this person**, mix two, or
    invent one. Don't repeat the last page's shape or layout (check `notes.md` → Pages).
 3. Load `references/sketchbook.md` and draw **sketch first**: if an idea can be drawn, draw it, and
-   let the text label the drawing. On a new topic, write its CSS block to `napkin.css` unchanged.
-   On later pages, `napkin.css` already exists: don't load or rewrite it, just link it.
+   let the text label the drawing. On a new topic only, also load `references/napkin-css.md` and
+   write its block to `napkin.css` unchanged. On later pages, just link the existing file.
 4. Fit the page into the topic's artifact using `references/page-shell.md`: one artifact per
-   topic, `notes.md`, publishing, and the local-folder fallback. On a new topic, copy its shell
-   template; on later pages, only append to `PAGES`.
+   topic, `notes.md`, publishing, and the local-folder fallback. On a new topic, also load
+   `references/shell-template.md`; on later pages, only append to `PAGES`.
 
 Every page has the six required parts from `references/shapes.md`: the idea in one line, the
 sketch, something to do, where it breaks, guess first then reveal, and sources.
@@ -92,7 +93,9 @@ Read the page as the user would:
 - All six required parts are there.
 - Phone-width rules from `references/page-shell.md` hold.
 
-Fix what fails, then publish.
+Fix what fails, then publish. This is a read-through of your own code, not a browser test: don't
+open a browser or loop on screenshots unless the user asks. One quick look is fine if a preview
+tool is already at hand.
 
 ## Fix one part
 

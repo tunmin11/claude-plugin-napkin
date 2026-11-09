@@ -5,7 +5,7 @@ Every topic is **one** artifact. Each napkin page is its own HTML file. A small 
 
 ```
 index.html                  ← the shell (published as the artifact's page)
-napkin.css                  ← shared look, from references/sketchbook.md (written once)
+napkin.css                  ← shared look, from references/napkin-css.md (written once)
 notes.md                    ← memory for Claude (not linked from the shell)
 pages/01-overview.html      ← page 1
 pages/02-how-it-fits.html   ← page 2 (newest → opens by default)
@@ -49,7 +49,7 @@ knows: … | for: … | metaphor world: … | language: …
 ## Publishing
 
 **With the Artifact tool:**
-- **First page:** write `napkin.css` (the CSS block in `references/sketchbook.md`, unchanged),
+- **First page:** write `napkin.css` (the block in `references/napkin-css.md`, unchanged),
   `notes.md` and the page. Publish `index.html` as the page with
   `files: { "napkin.css": "<local>", "notes.md": "<local>", "pages/01-<slug>.html": "<local>" }`.
   Pick a fitting `icon`. Pass the shell's `<title>` as `title`.
@@ -65,7 +65,7 @@ knows: … | for: … | metaphor world: … | language: …
      `files` = only what changed. Without `url`, you'd create a duplicate topic.
 - **Old v1 topic** (no `notes.md` in the artifact): build `notes.md` from the existing pages'
   titles and sources footers (best effort; mark facts you can't trace as `general knowledge`),
-  write `napkin.css`, and replace the shell with the template below (keep its `PAGES` lines).
+  write `napkin.css`, and replace the shell with `references/shell-template.md` (keep its `PAGES` lines).
   Publish all three with the new page. Old page files stay untouched and keep their old look.
   If one of them gets a "fix one part", switch that page to `../napkin.css` at the same time.
 
@@ -86,61 +86,7 @@ and add a page, but only when it's clearly the same topic (check its `<title>`).
 - Wraps every `localStorage` read and write in `try/catch`, so the page still renders without storage.
   Ticks and guesses are saved per browser only, under a key starting with `"napkin:" + <title>`.
 
-## Shell template
+## Shell
 
-Copy it, then change `PAGES`, `<title>`, and, if the user writes in another language, `lang`,
-the `latest` label, the `aria-label` and the iframe `title`, so the whole frame speaks their language.
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compound Interest</title>
-<link rel="stylesheet" href="napkin.css">
-<style>
-  html, body { height: 100%; }
-  body { display: flex; flex-direction: column; }
-  nav { display: flex; gap: 10px; padding: 10px 16px; border-bottom: 1.5px dashed var(--grid); overflow-x: auto; background: var(--paper); }
-  nav button { flex: none; min-height: 40px; padding: 4px 14px; border: 1.5px solid var(--ink); border-radius: 999px 999px 999px 999px / 60% 70% 60% 70%;
-               background: var(--card); color: var(--ink); font: 600 20px/1 var(--hand); cursor: pointer; }
-  nav button[aria-current="page"] { background: var(--note); color: var(--note-ink); transform: rotate(-1.5deg); }
-  nav small { margin-left: 6px; color: var(--accent); font: 700 11px var(--body); text-transform: uppercase; letter-spacing: .05em; }
-  iframe { flex: 1; width: 100%; border: 0; background: var(--paper); }
-</style>
-</head>
-<body>
-<nav id="strip" aria-label="Pages in this napkin"></nav>
-<iframe id="view" title="Napkin page"></iframe>
-<script>
-  // Add one line here per new page. Never edit or remove older lines.
-  const PAGES = [
-    { file: "pages/01-overview.html", title: "Overview" },
-  ];
-  const KEY = "napkin:" + document.title;
-  const strip = document.getElementById("strip"), view = document.getElementById("view");
-  const latest = PAGES.length - 1;
-  function show(i) {
-    view.src = PAGES[i].file;
-    strip.querySelectorAll("button").forEach((b, j) =>
-      j === i ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
-    try { sessionStorage.setItem(KEY, String(i)); } catch (e) { /* storage blocked: fine, just don't remember */ }
-  }
-  PAGES.forEach((p, i) => {
-    const b = document.createElement("button");
-    b.textContent = (i + 1) + " · " + p.title;
-    if (i === latest) b.insertAdjacentHTML("beforeend", "<small>latest</small>");
-    b.onclick = () => show(i);
-    strip.append(b);
-  });
-  let start = latest;
-  try { const s = sessionStorage.getItem(KEY); if (s !== null && +s >= 0 && +s < PAGES.length) start = +s; } catch (e) { /* use latest */ }
-  show(start);
-</script>
-</body>
-</html>
-```
-
-The shell remembers the open page only for the current browser session, so a fresh visit always
-lands on the newest page.
+The shell template is in `references/shell-template.md`. Load it only for a new topic or a v1
+upgrade. On later pages, only append one line to `PAGES` in the existing `index.html`.
