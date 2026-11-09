@@ -35,7 +35,19 @@ open `./learn/<topic-slug>/index.html`. If that folder already exists, add a pag
 
 - Is a full document: `<!doctype html>`, `<meta charset="utf-8">`, the viewport meta, and its own `<style>`.
 - Defines color tokens on `:root` and handles dark mode the same way the shell does (copy the token block).
-- Works at phone width: 16px side gutter, no horizontal page scroll, and tap targets ≥ 40px.
+- Works at phone width (390px): 16px side gutter, no horizontal page scroll, and tap targets ≥ 40px.
+  These guardrails go in every page's CSS:
+  ```css
+  *, *::before, *::after { box-sizing: border-box; }
+  svg, img, canvas, table { max-width: 100%; }
+  body { overflow-wrap: anywhere; }
+  /* grids: never a fixed column count, let them wrap */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  /* flex rows: wrap, and let children shrink */
+  .row { display: flex; flex-wrap: wrap; gap: 8px; } .row > * { min-width: 0; }
+  ```
+  Before handing over, scan your CSS for `repeat(<number>, …)`, fixed `width:` in px over 340, and
+  `white-space: nowrap`. Each one is a sideways-scroll bug on a phone.
 - Is self-contained. Scripts may come only from cdnjs.cloudflare.com / cdn.jsdelivr.net/npm /
   unpkg.com with exact versions, and fonts only from Google Fonts. Draw with inline SVG; no external images.
 - Has something to **do**, such as a click, toggle, tick, slider or reveal.
