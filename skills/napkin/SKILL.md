@@ -4,10 +4,11 @@ description: >
   Explain it on a napkin. Turns a topic, link, document or folder of files into a visual,
   hands-on learning page (a sketch with a metaphor from the user's own world, a learning path,
   a tick-off tutorial, a comparison and more), with fresh facts and sources. Keeps one
-  artifact per topic and stacks new pages inside it. Use when the user wants to learn or
-  understand something: "explain X to me", "help me understand X", "I need to learn X",
-  "make this easier to read", "what's in this folder/doc", "napkin this", or when they
-  share a long doc or link and seem stuck reading it.
+  artifact per topic and stacks new pages inside it. Use when the user asks to learn a topic
+  in a visual or hands-on way ("napkin this", "draw/sketch/visualize this for me", "make me a
+  page to learn X", "make this easier to read"), asks what's worth learning in a doc or folder,
+  or shares a long doc or link and is clearly stuck reading it. Not for quick factual answers,
+  debugging, or questions about code the user is working on.
 ---
 
 # napkin
@@ -24,10 +25,12 @@ Work out what they brought:
 - **A topic in a few words.** Go to step 2.
 - **A link.** Fetch and read it, then go to step 2.
 - **A long document, or a folder of files.** Skim it first, then suggest **3–4 angles** worth learning,
-  in one short message. Good angles point at something specific: "these two docs disagree about X",
-  "the core idea behind all of this is Y", "Z is explained here three different ways". Let them
-  pick one or name their own. Skip files you can't read (images, binaries, huge files) and say so
-  in one line. Don't let them stop you.
+  and put the quick questions from step 2 **in the same message**, so it's one round, not two.
+  Good angles point at something specific: "these two docs disagree about X", "the core idea
+  behind all of this is Y", "Z is explained here three different ways". Let them pick one or name
+  their own. In a big folder, read up to ~15 text files (skip `node_modules`, `.git` and other
+  build or dependency folders) and list the rest by name. Skip anything you can't read and say so
+  in one line. Don't let it stop you.
 - **Coming back to a topic** ("more on mortgages", "go deeper"). Find the existing napkin first
   (see `references/page-shell.md` → Publishing → *Coming back in a new conversation*). Add a page; don't start a new artifact.
 

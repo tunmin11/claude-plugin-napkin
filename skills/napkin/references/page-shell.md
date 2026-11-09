@@ -24,12 +24,18 @@ pages/02-how-it-fits.html   ← page 2 (newest → opens by default)
   `files: { "pages/01-<slug>.html": "<local path>" }`. Pick a fitting `icon`.
 - **Adding a page:** edit the `PAGES` array, then republish the same `index.html` `file_path` and
   pass **only the new page** in `files`. Files you leave out are kept as they are.
-- **Coming back in a new conversation:** run `action: "list"`, find the topic's artifact by title,
-  `read` it, and build on that. If two artifacts match, or the match is unclear, ask once. Never
-  overwrite on a guess.
+- **The title** is the shell's `<title>`. Pass the same text as the publish `title`, so the topic can be found again later.
+- **Coming back in a new conversation:**
+  1. Run `action: "list"` and match the topic against artifact titles. If two match, or the match is
+     unclear, ask once. Never overwrite on a guess.
+  2. `read` that artifact's `url` to get the current `index.html`. Save it locally, append the new
+     line to `PAGES`, and write the new page file.
+  3. Publish with **`url` set to that artifact** (not a new artifact), `file_path` = your local
+     `index.html`, and `files` = only the new page. Without `url`, you'd create a duplicate topic.
 
 **Without the Artifact tool:** write the same tree to `./learn/<topic-slug>/` and tell the user to
-open `./learn/<topic-slug>/index.html`. If that folder already exists, add a page to it.
+open `./learn/<topic-slug>/index.html`. If that folder already exists, add a page to it, but only
+when it's clearly the same topic (check its `<title>`). If you're not sure, ask once.
 
 ## Every page (each file in `pages/`)
 
@@ -54,13 +60,16 @@ open `./learn/<topic-slug>/index.html`. If that folder already exists, add a pag
 - Ends with a **sources footer**:
   ```html
   <footer class="sources">
-    <p>Facts checked on 2026-11-09</p>   <!-- or: "Not web-checked: built from your files / general knowledge" -->
+    <p>Facts checked on YYYY-MM-DD</p>   <!-- today's real date. Or: "Not web-checked: built from your files / general knowledge" -->
     <ol><li><a href="…">Source title</a>: what it was used for</li></ol>
   </footer>
   ```
 - Wraps every `localStorage` read and write in `try/catch`, so the page still renders without storage.
 
-## Shell template (copy, then change the title and `PAGES`)
+## Shell template
+
+Copy it, then change `PAGES`, `<title>`, and, if the user writes in another language, `lang`,
+the `latest` label, the `aria-label` and the iframe `title`, so the whole frame speaks their language.
 
 ```html
 <!doctype html>
