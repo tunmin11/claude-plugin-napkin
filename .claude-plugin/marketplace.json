@@ -1,0 +1,16 @@
+{
+  "name": "napkin",
+  "owner": {
+    "name": "tunmin11"
+  },
+  "metadata": {
+    "description": "napkin: a Claude skill for learning things without reading walls of text."
+  },
+  "plugins": [
+    {
+      "name": "napkin",
+      "source": "./",
+      "description": "Explain it to me on a napkin: turns text, links, docs or folders into visual, hands-on learning pages."
+    }
+  ]
+}

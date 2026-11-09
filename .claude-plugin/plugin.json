@@ -1,0 +1,9 @@
+{
+  "name": "napkin",
+  "version": "0.1.0",
+  "description": "Explain it to me on a napkin: turns text, links, docs or folders into visual, hands-on learning pages.",
+  "author": { "name": "tunmin11" },
+  "repository": "https://github.com/tunmin11/claude-plugin-napkin",
+  "license": "MIT",
+  "keywords": ["learning", "explainer", "visual", "artifact"]
+}
